@@ -30,7 +30,9 @@ from yatl.helpers import A
 from .common import db, session, T, cache, auth, logger, authenticated, unauthenticated, flash
 from py4web.utils.url_signer import URLSigner
 from .models import get_user_email
+import requests
 
+import time
 url_signer = URLSigner(session)
 
 @action('index')
@@ -38,3 +40,13 @@ url_signer = URLSigner(session)
 def index():
     print("User:", get_user_email())
     return dict()
+
+@action('getval')
+def getval():
+    time.sleep(0.1)
+    return "ok"
+
+def do_http_get():
+    r = requests.get("http://127.0.0.1:8000/promises/getval")
+    print(r.status_code, r.text)
+
